@@ -121,13 +121,14 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter.html
-    reporters: ['spec','dot',['allure', {outputDir: 'allure-results'}],'mochawesome'],
+    reporters: ['spec','dot',['allure', {outputDir: 'allure-results'}]],
  
     //
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: 'bdd',
+        compilers: ['js:@babel/register'],
         timeout: 60000
     },
     //
@@ -161,7 +162,26 @@ exports.config = {
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
     before: function (capabilities, specs) {
+        require: ['@babel/register', './test/helpers/common.js'],
         expect = require('chai').expect;
+
+        browser.addCommand('waitAndSendkeys', (element, keys) => {
+            try {
+                element.waitForExist();
+                element.setValue(keys);
+            } catch(Error) {
+                throw new Error('Could not send keys: ' + $(keys) + ' to ' + element);
+            }
+        })
+
+        browser.addCommand('waitAndClick', (element) => {
+            try {
+                element.waitForExist();
+                element.click();
+            } catch(Error) {
+                throw new Error('Could not click on ' + element);
+            }
+        })
     },
     /**
      * Runs before a WebdriverIO command gets executed.
