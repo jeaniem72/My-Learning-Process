@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "selenium-server" : "./node_modules/.bin/selenium-standalone start",
-    "test": "./node_modules/.bin/wdio wdio.conf.js"
+    "selenium-server": "./node_modules/.bin/selenium-standalone start",
+    "test": "./node_modules/.bin/wdio wdio.conf.js",
+    "report": "allure generate /Users/jeanie.ma/Study/my-learning-process/exercises/devconnector-exercise/allure-results && allure open"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,7 @@
     "@wdio/spec-reporter": "^6.1.12",
     "@wdio/sync": "^6.1.8",
     "chai": "^4.2.0",
+    "del": "^5.1.0",
     "mocha": "^7.2.0",
     "wdio-mochawesome-reporter": "^4.0.0",
     "webdriverio": "^6.1.12"

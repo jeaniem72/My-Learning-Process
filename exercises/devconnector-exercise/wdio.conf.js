@@ -153,8 +153,10 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
-    // beforeSession: function (config, capabilities, specs) {
-    // },
+    beforeSession: function (config, capabilities, specs) {
+        const del = require('del');
+        del(['allure-report','allure-results','errorShots'])
+    },
     /**
      * Gets executed before test execution begins. At this point you can access to all global
      * variables like `browser`. It is the perfect place to define custom commands.
@@ -246,6 +248,8 @@ exports.config = {
      * @param {Array.<String>} specs List of spec file paths that ran
      */
     // after: function (result, capabilities, specs) {
+    //     var name = 'ERROR-chrome-' + Date.now();
+    //     browser.saveScreenshot('./errorShots/' + name + '.png');
     // },
     /**
      * Gets executed right after terminating the webdriver session.
