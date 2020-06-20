@@ -121,7 +121,12 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter.html
-    reporters: ['spec','dot',['allure', {outputDir: 'allure-results'}]],
+    reporters: ['spec','dot',
+    ['allure', {outputDir: 'allure-results'}]
+    // ['mochawesome',{
+    //     outputDir: './mochawesome-report'
+    // }],
+    ],
  
     //
     // Options to be passed to Mocha.
